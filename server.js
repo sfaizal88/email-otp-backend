@@ -12,9 +12,12 @@ app.use(cors());
 const OTPs = {}; // Store OTPs temporarily
 const OTP_EXPIRATION_TIME = 60000; // 1 minute
 
-// Function to generate a 6-digit OTP
 function generateOTP() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  let code;
+  do {
+    code = Math.floor(100000 + Math.random() * 900000).toString();
+  } while (code.length !== 6 || code.startsWith('0'));
+  return code;
 }
 
 // Function to send email
